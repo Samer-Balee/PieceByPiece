@@ -140,6 +140,8 @@ main{
 h3{
     color: var(--highlightColor);
     line-height: 3rem;
+    font-size: 1.4rem;
+    color: rgb(19, 51, 138);
 }
 .boxHeader{
     border-bottom: 0.2rem solid var(--highlightColor);
@@ -168,6 +170,8 @@ h3{
 .boxPContent{
     height: 17rem;
     padding: 0.5rem;
+    font-size: 1.2rem;
+    color: rgb(5, 18, 54);
 }
 .score{
     display: flex;

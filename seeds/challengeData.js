@@ -15,6 +15,22 @@ const challengeData = [
     description: "I should do workout four days a week",
     
   },
+  {
+    title: "Wake up early",
+    description: "I should Wake up every day early at 5am",
+    
+  },
+  {
+    title: "Learn playing piano",
+    description: "I should practice four days a week playing oiano",
+    
+  },
+  {
+    title: "Practice typing",
+    description: "I should practice typing one hour every day",
+    
+  },
+
   
 ];
 

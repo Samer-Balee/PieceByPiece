@@ -19,36 +19,41 @@ if (process.env.JAWSDB_URL) {
 
 router.get('/', async function (req, res, next) {
     if (req.session.loggedIn) {
-        const scoreData = await Score.findAll({ where: { user_id: req.session.user_id } });
-        const userchallenges = scoreData.map((chal) => chal.get({ plain: true }));
-        res.render('homepage', { layout: 'main', title: 'Homepage', userchallenges, userFname: req.session.f_name, loggedIn: req.session.loggedIn });
+        const scoreData = await Score.findAll(
+            { 
+                where: { user_id: req.session.user_id },
+               
+            
+            });
+            const scores = scoreData.map((chal) => chal.get({ plain: true }));
+
+            const queries = [];
+
+            scores.forEach( score => {
+                queries.push(Challenge.findOne(
+                    {
+                        where: { id: score.challenge_id}
+                    }
+                ));
+            });
+
+            const challenges = await Promise.all(queries);
+
+           scores.forEach((score) =>{
+                const scoreChallenge = challenges.find(challenge => score.challenge_id === challenge.id);
+
+                score.challenge_title = scoreChallenge.title;
+                score.challenge_description = scoreChallenge.description;
+           });
+           // console.log(scores); 
+        
+        res.render('homepage', { layout: 'main', title: 'Homepage', userchallenges: scores , userFname: req.session.f_name, loggedIn: req.session.loggedIn });
+        // res.status(200).json(scores);
     }
     else {
         res.redirect('/login');
     }
 });
-// router.get('/', async function(req, res, next){
-//         try{
-//             const challengeData = await Challenge.findAll({
-//                     include: [
-//                         {
-//                             model: User,
-//                             through: Score,
-//                             required: true
-//                         }
-//                     ]
-//             },
-//             {
-//                 where: {users_id: req.session.user_id}
-//             }
-//             );
-//             const userchallenges = challengeData.map((chal) => chal.get({ plain: true }));
-//             res.render('homepage', {layout: 'main', title: 'Homepage', userchallenges, userFname: req.session.f_name, loggedIn: req.session.loggedIn});
-//         }catch(err){
-//             res.status(500).json(err);
-//         }
-// })
-
 
 
 router.get('/signup', function (req, res, next) {

@@ -7,6 +7,11 @@ const scoreData = [
   user_id: 1  
 },
 {
+  user_score: 2,
+  challenge_id: 6,
+  user_id: 1  
+},
+{
   user_score: 1,
   challenge_id: 2,
   user_id: 3  
@@ -22,9 +27,19 @@ const scoreData = [
   user_id: 2  
 },
 {
-  user_score: 4,
+  user_score: 2,
   challenge_id: 3,
-  user_id: 1
+  user_id: 3
+},
+{
+  user_score: 2,
+  challenge_id: 3,
+  user_id: 4
+},
+{
+  user_score: 2,
+  challenge_id: 5,
+  user_id: 4
 }
 
 ];
